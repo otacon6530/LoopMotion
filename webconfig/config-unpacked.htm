@@ -803,333 +803,6 @@ img {
 
             <h3 class="center">Left Side</h3>
 
-            
-              
-
-
-
-
-
-
-
-
-  
-    
-<label class=" None"> Screen Count</label>
-
-    <select class="api" data-type="uint32" data-key="11" required>
-    <option disabled selected value></option>
-
-    
-    <option value="1">1</option>
-    
-    <option value="2">2</option>
-    
-    <option value="3">3</option>
-    
-    </select><br />
-
-  
-
-            
-              
-
-
-
-
-
-
-
-
-  
-    
-<label class=" None"> Screen Position</label>
-
-    <select class="api" data-type="uint8" data-key="17" required>
-    <option disabled selected value></option>
-
-    
-    <option value="1">Left</option>
-    
-    <option value="2">Right</option>
-    
-    </select><br />
-
-  
-
-            
-              
-
-
-
-
-
-
-
-
-  
-    
-<label class=" None"> Operating System</label>
-
-    <select class="api" data-type="uint8" data-key="16" required>
-    <option disabled selected value></option>
-
-    
-    <option value="1">Linux</option>
-    
-    <option value="2">MacOS</option>
-    
-    <option value="3">Windows</option>
-    
-    <option value="4">Android</option>
-    
-    <option value="255">Other</option>
-    
-    </select><br />
-
-  
-
-            
-              
-
-
-
-
-
-
-
-
-  
-    
-<label class=" Title"> Screensaver</label>
-
-
-  
-
-            
-              
-
-
-
-
-
-
-
-
-  
-    
-<label class=" None"> Type</label>
-
-    <select class="api" data-type="uint8" data-key="19" required>
-    <option disabled selected value></option>
-
-    
-    <option value="0">Disabled</option>
-    
-    <option value="1">Pong</option>
-    
-    <option value="2">Jitter</option>
-    
-    </select><br />
-
-  
-
-            
-              
-
-
-
-
-
-
-
-
-  
-      
-<label class=" None"> Idle Time (μs)</label>
-
-      
-<input class="api None" type="text" name="name21" data-type="uint64" data-key="21"
-  onchange="valueChangedHandler(this)"
-  />
-
-  
-
-            
-              
-
-
-
-
-
-
-
-
-  
-      
-<label class=" None"> Max Time (μs)</label>
-
-      
-<input class="api None" type="text" name="name22" data-type="uint64" data-key="22"
-  onchange="valueChangedHandler(this)"
-  />
-
-  
-
-            
-              
-
-
-
-
-
-
-
-
-  
-    
-<label class=" Title"> Mouse Acceleration</label>
-
-
-  
-
-            
-              
-
-
-
-
-
-
-
-
-  
-  <div class="clearfix">
-    <form>
-      
-<label class="label-inline None"> Speed X=</label>
-
-
-      
-<input class="input-inline None" type="number" name="aInput12" data-type="int32" data-key="12"
-  onchange="valueChangedHandler(this)"
-
-        readonly oninput="this.form.aRange12.value=this.value" />
-
-      
-<input class="range api None" type="range" name="aRange12" data-type="int32" data-key="12"
-  onchange="valueChangedHandler(this)"
-
-        min="1" max="100" oninput="this.form.aInput12.value=this.value" />
-    </form>
-
-  </div>
-
-  
-
-            
-              
-
-
-
-
-
-
-
-
-  
-  <div class="clearfix">
-    <form>
-      
-<label class="label-inline None"> Speed Y=</label>
-
-
-      
-<input class="input-inline None" type="number" name="aInput13" data-type="int32" data-key="13"
-  onchange="valueChangedHandler(this)"
-
-        readonly oninput="this.form.aRange13.value=this.value" />
-
-      
-<input class="range api None" type="range" name="aRange13" data-type="int32" data-key="13"
-  onchange="valueChangedHandler(this)"
-
-        min="1" max="100" oninput="this.form.aInput13.value=this.value" />
-    </form>
-
-  </div>
-
-  
-
-            
-              
-
-
-
-
-
-
-
-
-  
-    
-<label class=" Title"> Precision Screen Alignment</label>
-
-
-  
-
-            
-              
-
-
-
-
-
-
-
-
-  
-      
-<label class=" None"> Border Top</label>
-
-      
-<input class="api None" type="text" name="name14" data-type="int32" data-key="14"
-  onchange="valueChangedHandler(this)"
-  />
-
-  
-
-            
-              
-
-
-
-
-
-
-
-
-  
-      
-<label class=" None"> Border Bottom</label>
-
-      
-<input class="api None" type="text" name="name15" data-type="int32" data-key="15"
-  onchange="valueChangedHandler(this)"
-  />
-
-  
-
-            
-
-        </div>
-        
-        <div class="column" style="padding-top: 2em;">
-          <svg class="center">
-          <use href="#monitor" />
-          </svg>
-
-            <h3 class="center">Right Side</h3>
 
             
               
@@ -1443,6 +1116,334 @@ img {
 
       
 <input class="api None" type="text" name="name45" data-type="int32" data-key="45"
+  onchange="valueChangedHandler(this)"
+  />
+
+  
+
+            
+
+        </div>
+        
+        <div class="column" style="padding-top: 2em;">
+          <svg class="center">
+          <use href="#monitor" />
+          </svg>
+
+            <h3 class="center">Right Side</h3>
+
+            
+              
+
+
+
+
+
+
+
+
+  
+    
+<label class=" None"> Screen Count</label>
+
+    <select class="api" data-type="uint32" data-key="11" required>
+    <option disabled selected value></option>
+
+    
+    <option value="1">1</option>
+    
+    <option value="2">2</option>
+    
+    <option value="3">3</option>
+    
+    </select><br />
+
+  
+
+            
+              
+
+
+
+
+
+
+
+
+  
+    
+<label class=" None"> Screen Position</label>
+
+    <select class="api" data-type="uint8" data-key="17" required>
+    <option disabled selected value></option>
+
+    
+    <option value="1">Left</option>
+    
+    <option value="2">Right</option>
+    
+    </select><br />
+
+  
+
+            
+              
+
+
+
+
+
+
+
+
+  
+    
+<label class=" None"> Operating System</label>
+
+    <select class="api" data-type="uint8" data-key="16" required>
+    <option disabled selected value></option>
+
+    
+    <option value="1">Linux</option>
+    
+    <option value="2">MacOS</option>
+    
+    <option value="3">Windows</option>
+    
+    <option value="4">Android</option>
+    
+    <option value="255">Other</option>
+    
+    </select><br />
+
+  
+
+            
+              
+
+
+
+
+
+
+
+
+  
+    
+<label class=" Title"> Screensaver</label>
+
+
+  
+
+            
+              
+
+
+
+
+
+
+
+
+  
+    
+<label class=" None"> Type</label>
+
+    <select class="api" data-type="uint8" data-key="19" required>
+    <option disabled selected value></option>
+
+    
+    <option value="0">Disabled</option>
+    
+    <option value="1">Pong</option>
+    
+    <option value="2">Jitter</option>
+    
+    </select><br />
+
+  
+
+            
+              
+
+
+
+
+
+
+
+
+  
+      
+<label class=" None"> Idle Time (μs)</label>
+
+      
+<input class="api None" type="text" name="name21" data-type="uint64" data-key="21"
+  onchange="valueChangedHandler(this)"
+  />
+
+  
+
+            
+              
+
+
+
+
+
+
+
+
+  
+      
+<label class=" None"> Max Time (μs)</label>
+
+      
+<input class="api None" type="text" name="name22" data-type="uint64" data-key="22"
+  onchange="valueChangedHandler(this)"
+  />
+
+  
+
+            
+              
+
+
+
+
+
+
+
+
+  
+    
+<label class=" Title"> Mouse Acceleration</label>
+
+
+  
+
+            
+              
+
+
+
+
+
+
+
+
+  
+  <div class="clearfix">
+    <form>
+      
+<label class="label-inline None"> Speed X=</label>
+
+
+      
+<input class="input-inline None" type="number" name="aInput12" data-type="int32" data-key="12"
+  onchange="valueChangedHandler(this)"
+
+        readonly oninput="this.form.aRange12.value=this.value" />
+
+      
+<input class="range api None" type="range" name="aRange12" data-type="int32" data-key="12"
+  onchange="valueChangedHandler(this)"
+
+        min="1" max="100" oninput="this.form.aInput12.value=this.value" />
+    </form>
+
+  </div>
+
+  
+
+            
+              
+
+
+
+
+
+
+
+
+  
+  <div class="clearfix">
+    <form>
+      
+<label class="label-inline None"> Speed Y=</label>
+
+
+      
+<input class="input-inline None" type="number" name="aInput13" data-type="int32" data-key="13"
+  onchange="valueChangedHandler(this)"
+
+        readonly oninput="this.form.aRange13.value=this.value" />
+
+      
+<input class="range api None" type="range" name="aRange13" data-type="int32" data-key="13"
+  onchange="valueChangedHandler(this)"
+
+        min="1" max="100" oninput="this.form.aInput13.value=this.value" />
+    </form>
+
+  </div>
+
+  
+
+            
+              
+
+
+
+
+
+
+
+
+  
+    
+<label class=" Title"> Precision Screen Alignment</label>
+
+
+  
+
+            
+              
+
+
+
+
+
+
+
+
+  
+      
+<label class=" None"> Border Top</label>
+
+      
+<input class="api None" type="text" name="name14" data-type="int32" data-key="14"
+  onchange="valueChangedHandler(this)"
+  />
+
+  
+
+            
+              
+
+
+
+
+
+
+
+
+  
+      
+<label class=" None"> Border Bottom</label>
+
+      
+<input class="api None" type="text" name="name15" data-type="int32" data-key="15"
   onchange="valueChangedHandler(this)"
   />
 
