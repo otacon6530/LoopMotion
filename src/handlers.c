@@ -392,3 +392,34 @@ void set_active_output(device_t *state, uint8_t new_output) {
        Changing outputs = no more keypresses on the previous system. */
     release_all_keys(state);
 }
+
+/* Quick text: Send stored string when Shift+RCtrl+0-9 is pressed */
+void quick_text_hotkey_handler(device_t *state, hid_keyboard_report_t *report) {
+    uint8_t slot = 0xFF;
+
+    /* Find which key (0-9) was pressed */
+    for (int i = 0; i < KEYS_IN_USB_REPORT; i++) {
+        uint8_t key = report->keycode[i];
+        if (key >= HID_KEY_0 && key <= HID_KEY_9) {
+            slot = key - HID_KEY_0;
+            break;
+        }
+    }
+
+    /* If valid slot and string is not empty, send it */
+    if (slot < QUICK_TEXT_SLOTS) {
+        char *text = state->config.quick_text[slot];
+        size_t len = strlen(text);
+        if (len > 0) {
+            /* Release all keys first to avoid modifier conflicts */
+            release_all_keys(state);
+            sleep_us(10000);
+
+            /* Send each character as a key press */
+            for (size_t i = 0; i < len; i++) {
+                send_char(text[i], state);
+                sleep_us(15000);  /* 15ms between characters */
+            }
+        }
+    }
+}

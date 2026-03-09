@@ -45,7 +45,7 @@ function makeReport(type, payload, proxy=false) {
 
 function packValue(element, key, dataType, buffer) {
   const dataOffset = 1;
-  var buffer = new ArrayBuffer(8);
+  var buffer = new ArrayBuffer(64);
   var view = new DataView(buffer);
 
   const methods = {
@@ -58,7 +58,15 @@ function packValue(element, key, dataType, buffer) {
     "int8": view.setInt8
   };
 
-  if (dataType in methods) {
+  if (dataType === "string") {
+    const str = element.value || "";
+    const encoder = new TextEncoder();
+    const encoded = encoder.encode(str);
+    for (let i = 0; i < 64; i++) {
+      view.setUint8(dataOffset + i, i < encoded.length ? encoded[i] : 0);
+    }
+  }
+  else if (dataType in methods) {
     const method = methods[dataType];
     if (element.type === 'checkbox')
       view.setUint8(dataOffset, element.checked ? 1 : 0, true);
@@ -143,7 +151,18 @@ function updateElement(key, event) {
 
   dataType = element.getAttribute('data-type');
 
-  if (dataType in methods) {
+  if (dataType === "string") {
+    let bytes = [];
+    for (let i = 0; i < 64; i++) {
+      const byte = event.data.getUint8(dataOffset + i);
+      if (byte === 0) break;
+      bytes.push(byte);
+    }
+    const decoder = new TextDecoder();
+    const value = decoder.decode(new Uint8Array(bytes));
+    setValue(element, value);
+  }
+  else if (dataType in methods) {
     var value = methods[dataType].call(event.data, dataOffset, true);
     setValue(element, value);
 

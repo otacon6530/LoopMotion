@@ -61,6 +61,18 @@ const field_map_t api_field_map[] = {
     { 76, false, UINT8,  1, offsetof(device_t, config.enforce_ports) },
     { 77, false, UINT16, 2, offsetof(device_t, config.jump_threshold) },
 
+    /* Quick text strings (Shift+RCtrl+0-9) */
+    { 100, false, STRING, 64, offsetof(device_t, config.quick_text[0]) },
+    { 101, false, STRING, 64, offsetof(device_t, config.quick_text[1]) },
+    { 102, false, STRING, 64, offsetof(device_t, config.quick_text[2]) },
+    { 103, false, STRING, 64, offsetof(device_t, config.quick_text[3]) },
+    { 104, false, STRING, 64, offsetof(device_t, config.quick_text[4]) },
+    { 105, false, STRING, 64, offsetof(device_t, config.quick_text[5]) },
+    { 106, false, STRING, 64, offsetof(device_t, config.quick_text[6]) },
+    { 107, false, STRING, 64, offsetof(device_t, config.quick_text[7]) },
+    { 108, false, STRING, 64, offsetof(device_t, config.quick_text[8]) },
+    { 109, false, STRING, 64, offsetof(device_t, config.quick_text[9]) },
+
     /* Firmware */
     { 78, true,  UINT16, 2, offsetof(device_t, _running_fw.version) },
     { 79, true,  UINT32, 4, offsetof(device_t, _running_fw.checksum) },

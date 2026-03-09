@@ -55,8 +55,14 @@
     </select><br />
 
   {% else %}
+      {% if item.type == "string" %}
+      {{ label(item, class='') }}
+      <input class="api" type="text" name="{{ name }}{{ key }}" data-type="{{ item.type }}" data-key="{{ key }}" 
+        maxlength="{{ item.maxlen }}" onchange="valueChangedHandler(this)" />
+      {% else %}
       {{ label(item, class='') }}
       {{ input(item) }}  />
+      {% endif %}
 
   {% endif %}
 {% endblock %}

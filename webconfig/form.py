@@ -6,11 +6,12 @@ from dataclasses import dataclass, field
 class FormField:
     offset: int
     name: str
-    default: int | None = None
+    default: int | str | None = None
     values: dict[int, str] = field(default_factory=dict)
     data_type: str = "int32"
     elem: str | None = None,
     style: str | None = None
+    maxlen: int = 0
 
 SHORTCUTS = {
     0x73: "None",
@@ -37,6 +38,18 @@ CONFIG_ = [
     FormField(72, "Force KBD Boot Protocol", None, {}, "uint8", "checkbox"),
     FormField(73, "KBD LED as Indicator", None, {}, "uint8", "checkbox"),
     FormField(76, "Enforce Ports", None, {}, "uint8", "checkbox"),
+
+    FormField(1006, "Quick Text (Shift+RCtrl+0-9)", elem="label", style="Title"),
+    FormField(100, "Slot 0", "", {}, "string", maxlen=64),
+    FormField(101, "Slot 1", "", {}, "string", maxlen=64),
+    FormField(102, "Slot 2", "", {}, "string", maxlen=64),
+    FormField(103, "Slot 3", "", {}, "string", maxlen=64),
+    FormField(104, "Slot 4", "", {}, "string", maxlen=64),
+    FormField(105, "Slot 5", "", {}, "string", maxlen=64),
+    FormField(106, "Slot 6", "", {}, "string", maxlen=64),
+    FormField(107, "Slot 7", "", {}, "string", maxlen=64),
+    FormField(108, "Slot 8", "", {}, "string", maxlen=64),
+    FormField(109, "Slot 9", "", {}, "string", maxlen=64),
 ]
 
 OUTPUT_ = [
@@ -68,6 +81,7 @@ def generate_output(base, data):
             "type": field.data_type,
             "elem": field.elem,
             "style": field.style,
+            "maxlen": field.maxlen,
         }
         for field in data
     ]

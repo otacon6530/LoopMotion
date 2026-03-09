@@ -106,7 +106,15 @@ hotkey_combo_t hotkeys[] = {
      .keys           = {HID_KEY_B},
      .key_count      = 1,
      .acknowledge    = true,
-     .action_handler = &fw_upgrade_hotkey_handler_B}};
+     .action_handler = &fw_upgrade_hotkey_handler_B},
+
+    /* Quick text: Shift + Right Ctrl + 0-9 */
+    {.modifier       = KEYBOARD_MODIFIER_RIGHTSHIFT | KEYBOARD_MODIFIER_RIGHTCTRL,
+     .keys           = {},
+     .key_count      = 0,
+     .acknowledge    = true,
+     .action_handler = &quick_text_hotkey_handler},
+};
 
 /* ============================================================ *
  * Detect if any hotkeys were pressed
@@ -385,4 +393,102 @@ keyboard_t *get_keyboard(hid_interface_t *iface, uint8_t report_id) {
 
     /* If nothing else is matched, return the primary keyboard. */
     return &iface->keyboards[PRIMARY_KEYBOARD];
+}
+
+/* Send a single character as a key press */
+void send_char(char c, device_t *state) {
+    uint8_t keycode = 0;
+    uint8_t modifier = 0;
+
+    /* Handle uppercase letters */
+    if (c >= 'A' && c <= 'Z') {
+        keycode = HID_KEY_A + (c - 'A');
+        modifier = KEYBOARD_MODIFIER_LEFTSHIFT;
+    }
+    /* Handle lowercase letters */
+    else if (c >= 'a' && c <= 'z') {
+        keycode = HID_KEY_A + (c - 'a');
+    }
+    /* Handle numbers */
+    else if (c >= '0' && c <= '9') {
+        keycode = HID_KEY_1 + (c - '0');
+    }
+    /* Handle space */
+    else if (c == ' ') {
+        keycode = HID_KEY_SPACE;
+    }
+    /* Handle enter/return */
+    else if (c == '\n' || c == '\r') {
+        keycode = HID_KEY_ENTER;
+    }
+    /* Handle tab */
+    else if (c == '\t') {
+        keycode = HID_KEY_TAB;
+    }
+    /* Handle special characters with shift */
+    else if (c == '!' || c == '@' || c == '#' || c == '$' || c == '%' ||
+             c == '^' || c == '&' || c == '*' || c == '(' || c == ')' ||
+             c == '_' || c == '+' || c == '{' || c == '}' || c == '|' ||
+             c == ':' || c == '"' || c == '<' || c == '>' || c == '?' ||
+             c == '~') {
+        modifier = KEYBOARD_MODIFIER_LEFTSHIFT;
+        switch (c) {
+            case '!': keycode = HID_KEY_1; break;
+            case '@': keycode = HID_KEY_2; break;
+            case '#': keycode = HID_KEY_3; break;
+            case '$': keycode = HID_KEY_4; break;
+            case '%': keycode = HID_KEY_5; break;
+            case '^': keycode = HID_KEY_6; break;
+            case '&': keycode = HID_KEY_7; break;
+            case '*': keycode = HID_KEY_8; break;
+            case '(': keycode = HID_KEY_9; break;
+            case ')': keycode = HID_KEY_0; break;
+            case '_': keycode = HID_KEY_MINUS; break;
+            case '+': keycode = HID_KEY_EQUAL; break;
+            case '{': keycode = HID_KEY_BRACKET_LEFT; break;
+            case '}': keycode = HID_KEY_BRACKET_RIGHT; break;
+            case '|': keycode = HID_KEY_BACKSLASH; break;
+            case ':': keycode = HID_KEY_SEMICOLON; break;
+            case '"': keycode = HID_KEY_APOSTROPHE; break;
+            case '<': keycode = HID_KEY_COMMA; break;
+            case '>': keycode = HID_KEY_PERIOD; break;
+            case '?': keycode = HID_KEY_SLASH; break;
+            case '~': keycode = HID_KEY_GRAVE; break;
+        }
+    }
+    /* Handle regular special characters */
+    else {
+        switch (c) {
+            case '-': keycode = HID_KEY_MINUS; break;
+            case '=': keycode = HID_KEY_EQUAL; break;
+            case '[': keycode = HID_KEY_BRACKET_LEFT; break;
+            case ']': keycode = HID_KEY_BRACKET_RIGHT; break;
+            case '\\': keycode = HID_KEY_BACKSLASH; break;
+            case ';': keycode = HID_KEY_SEMICOLON; break;
+            case '\'': keycode = HID_KEY_APOSTROPHE; break;
+            case ',': keycode = HID_KEY_COMMA; break;
+            case '.': keycode = HID_KEY_PERIOD; break;
+            case '/': keycode = HID_KEY_SLASH; break;
+            case '`': keycode = HID_KEY_GRAVE; break;
+        }
+    }
+
+    if (keycode != 0) {
+        /* Create and send key press report */
+        hid_keyboard_report_t press_report = {
+            .modifier = modifier,
+            .keycode = {keycode, 0, 0, 0, 0, 0},
+            .reserved = 0,
+        };
+        send_key(&press_report, state);
+        sleep_us(5000);
+
+        /* Create and send key release report */
+        hid_keyboard_report_t release_report = {
+            .modifier = 0,
+            .keycode = {0, 0, 0, 0, 0, 0},
+            .reserved = 0,
+        };
+        send_key(&release_report, state);
+    }
 }

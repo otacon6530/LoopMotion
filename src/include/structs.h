@@ -80,6 +80,11 @@ typedef struct {
     uint16_t jump_threshold;
 
     output_t output[NUM_SCREENS];
+
+    #define QUICK_TEXT_SLOTS 10
+    #define QUICK_TEXT_MAX_LEN 64
+    char quick_text[QUICK_TEXT_SLOTS][QUICK_TEXT_MAX_LEN];
+
     uint32_t _reserved;
 
     // Keep checksum at the end of the struct
